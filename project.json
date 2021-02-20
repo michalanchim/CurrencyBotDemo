@@ -1,8 +1,9 @@
 {
   "name": "CurrencyBot",
   "description": "Blank Process",
-  "main": "WebApiIntegration\\GetMeanExchangeRateForDateRange.xaml",
+  "main": "Main.xaml",
   "dependencies": {
+    "Microsoft.Activities.Extensions": "[2.0.6.9]",
     "UiPath.Excel.Activities": "[2.10.0-preview]",
     "UiPath.Mail.Activities": "[1.10.0-preview]",
     "UiPath.System.Activities": "[20.10.3]",
@@ -57,6 +58,12 @@
     {
       "filePath": "WebApiIntegration\\GetMeanExchangeRateForDateRange.xaml",
       "uniqueId": "32a04d29-0d3f-4c08-9352-163d34f57263",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "Components\\GetExchangeRatesData.xaml",
+      "uniqueId": "6fdf3a19-1d5d-493f-a4a7-3a9ac80d7e53",
       "input": [],
       "output": []
     }

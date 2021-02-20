@@ -1,22 +1,12 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="GetTodaysMeanExchangeRate" this:GetTodaysMeanExchangeRate.in_CurrencyCode="eur" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.Collections;assembly=mscorlib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sxl="clr-namespace:System.Xml.Linq;assembly=System.Xml.Linq" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="GetTodaysMeanExchangeRate" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.Collections;assembly=mscorlib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sxl="clr-namespace:System.Xml.Linq;assembly=System.Xml.Linq" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_CurrencyCode" Type="InArgument(x:String)" />
     <x:Property Name="in_StartDate" Type="InArgument(s:DateTime)" />
     <x:Property Name="in_EndDate" Type="InArgument(s:DateTime)" />
     <x:Property Name="out_MeanExchangeRates" Type="OutArgument(x:Double)" />
   </x:Members>
-  <this:GetTodaysMeanExchangeRate.in_StartDate>
-    <InArgument x:TypeArguments="s:DateTime">
-      <mca:CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_50">DateTime.ParseExact("2021-02-15", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture)</mca:CSharpValue>
-    </InArgument>
-  </this:GetTodaysMeanExchangeRate.in_StartDate>
-  <this:GetTodaysMeanExchangeRate.in_EndDate>
-    <InArgument x:TypeArguments="s:DateTime">
-      <mca:CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_52">DateTime.ParseExact("2021-02-20", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture)</mca:CSharpValue>
-    </InArgument>
-  </this:GetTodaysMeanExchangeRate.in_EndDate>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>734.4,1669.6</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>806.4,1669.6</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -99,11 +89,7 @@
       <Variable x:TypeArguments="x:Int32" Name="statusCode" />
       <Variable x:TypeArguments="x:String" Name="response" />
       <Variable x:TypeArguments="sxl:XDocument" Name="responseXML" />
-      <Variable x:TypeArguments="x:String" Name="workflowName">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">GetMeanExchangeRateForDateRange</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="GetMeanExchangeRateForDateRange" Name="workflowName" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -351,7 +337,7 @@
                 </Assign.To>
                 <Assign.Value>
                   <InArgument x:TypeArguments="x:Double">
-                    <mca:CSharpValue x:TypeArguments="x:Double" sap2010:WorkflowViewState.IdRef="CSharpValue`1_55">sumOfMeanExchangeValues / responseXML.Descendants("Rates").Descendants("Rate").Count()</mca:CSharpValue>
+                    <mca:CSharpValue x:TypeArguments="x:Double" sap2010:WorkflowViewState.IdRef="CSharpValue`1_56">Math.Round(sumOfMeanExchangeValues / responseXML.Descendants("Rates").Descendants("Rate").Count(), 5)</mca:CSharpValue>
                   </InArgument>
                 </Assign.Value>
               </Assign>
