@@ -4,7 +4,7 @@
     <x:Property Name="out_ExchangeRatesData" Type="OutArgument(sd:DataTable)" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>982.4,1201.6</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>776,1201.6</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -116,7 +116,7 @@
           <av:PointCollection x:Key="ConnectorLocation">100,266.4 100,316.4</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <TryCatch DisplayName="Try Get Current Day Mean Exchange Rate" sap:VirtualizedContainerService.HintSize="546.4,1126.4" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch DisplayName="Try Get Current Day Mean Exchange Rate" sap:VirtualizedContainerService.HintSize="200,52.8" sap2010:WorkflowViewState.IdRef="TryCatch_1">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -184,7 +184,7 @@
           </Sequence>
         </TryCatch.Try>
         <TryCatch.Catches>
-          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="512.8,280" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="554.4,507.2" sap2010:WorkflowViewState.IdRef="Catch`1_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -195,28 +195,36 @@
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
               </ActivityAction.Argument>
-              <If sap:VirtualizedContainerService.HintSize="506.4,209.6" sap2010:WorkflowViewState.IdRef="If_1">
-                <If.Condition>
-                  <InArgument x:TypeArguments="x:Boolean">
-                    <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_10">exception.Message.EndsWith("404")</mca:CSharpValue>
-                  </InArgument>
-                </If.Condition>
-                <If.Then>
-                  <Assign sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_1">
-                    <Assign.To>
-                      <OutArgument x:TypeArguments="x:Boolean">
-                        <mca:CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_2">todaysExchangeRatesPublished</mca:CSharpReference>
-                      </OutArgument>
-                    </Assign.To>
-                    <Assign.Value>
-                      <InArgument x:TypeArguments="x:Boolean">False</InArgument>
-                    </Assign.Value>
-                  </Assign>
-                </If.Then>
-                <If.Else>
-                  <Rethrow sap:VirtualizedContainerService.HintSize="200,22.4" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
-                </If.Else>
-              </If>
+              <Sequence sap:VirtualizedContainerService.HintSize="548,436.8" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:Comment sap:VirtualizedContainerService.HintSize="506.4,94.4" sap2010:WorkflowViewState.IdRef="Comment_5" Text="// Status Code 404 means that exchange table for particular date wasn't yet puplished - mark it and handle in next step" />
+                <If sap:VirtualizedContainerService.HintSize="506.4,209.6" sap2010:WorkflowViewState.IdRef="If_1">
+                  <If.Condition>
+                    <InArgument x:TypeArguments="x:Boolean">
+                      <mca:CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_10">exception.Message.EndsWith("404")</mca:CSharpValue>
+                    </InArgument>
+                  </If.Condition>
+                  <If.Then>
+                    <Assign sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Boolean">
+                          <mca:CSharpReference x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpReference`1_2">todaysExchangeRatesPublished</mca:CSharpReference>
+                        </OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </If.Then>
+                  <If.Else>
+                    <Rethrow sap:VirtualizedContainerService.HintSize="200,22.4" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
+                  </If.Else>
+                </If>
+              </Sequence>
             </ActivityAction>
           </Catch>
         </TryCatch.Catches>
@@ -385,6 +393,7 @@
                         <Sequence.Variables>
                           <Variable x:TypeArguments="s:DateTime" Name="startingDate" />
                           <Variable x:TypeArguments="s:DateTime" Name="endingDate" />
+                          <Variable x:TypeArguments="x:String" Name="previousMonthsColumns" />
                         </Sequence.Variables>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -411,7 +420,7 @@
                           </Assign.To>
                           <Assign.Value>
                             <InArgument x:TypeArguments="s:DateTime">
-                              <mca:CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_76">DateTime.ParseExact(DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) + "-" + DateTime.Now.AddMonths(-1).ToString("MM") + "-" + DateTime.Now.AddMonths(-1).ToString("yyyy"), "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)</mca:CSharpValue>
+                              <mca:CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_92">DateTime.ParseExact(DateTime.DaysInMonth(DateTime.Now.AddMonths(-1).Year, DateTime.Now.AddMonths(-1).Month) + "-" + DateTime.Now.AddMonths(-1).ToString("MM") + "-" + DateTime.Now.AddMonths(-1).ToString("yyyy"), "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)</mca:CSharpValue>
                             </InArgument>
                           </Assign.Value>
                         </Assign>
@@ -424,7 +433,6 @@
                               <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="420,306.4" sap2010:WorkflowViewState.IdRef="Sequence_12">
                                 <Sequence.Variables>
                                   <Variable x:TypeArguments="x:Double" Name="meanExchangeRate" />
-                                  <Variable x:TypeArguments="x:String" Name="currentMeanExchangeRate" />
                                   <Variable x:TypeArguments="x:String" Name="effectiveDate" />
                                 </Sequence.Variables>
                                 <sap:WorkflowViewStateService.ViewState>
@@ -541,7 +549,7 @@
                               </Assign.To>
                               <Assign.Value>
                                 <InArgument x:TypeArguments="s:DateTime">
-                                  <mca:CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_78">DateTime.ParseExact(DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) + "-" + DateTime.Now.AddMonths(-2).ToString("MM") + "-" + DateTime.Now.AddMonths(-2).ToString("yyyy"), "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)</mca:CSharpValue>
+                                  <mca:CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_93">DateTime.ParseExact(DateTime.DaysInMonth(DateTime.Now.AddMonths(-2).Year, DateTime.Now.AddMonths(-2).Month) + "-" + DateTime.Now.AddMonths(-2).ToString("MM") + "-" + DateTime.Now.AddMonths(-2).ToString("yyyy"), "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)</mca:CSharpValue>
                                 </InArgument>
                               </Assign.Value>
                             </Assign>
@@ -554,7 +562,6 @@
                                   <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="420,306.4" sap2010:WorkflowViewState.IdRef="Sequence_15">
                                     <Sequence.Variables>
                                       <Variable x:TypeArguments="x:Double" Name="meanExchangeRate" />
-                                      <Variable x:TypeArguments="x:String" Name="currentMeanExchangeRate" />
                                       <Variable x:TypeArguments="x:String" Name="effectiveDate" />
                                     </Sequence.Variables>
                                     <sap:WorkflowViewStateService.ViewState>
@@ -634,7 +641,7 @@
                               <av:PointCollection x:Key="ConnectorLocation">150,226.4 150,276.4</av:PointCollection>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <TryCatch DisplayName="Try Get Three Month Earlier Mean Exchange Rate" sap:VirtualizedContainerService.HintSize="200,52.8" sap2010:WorkflowViewState.IdRef="TryCatch_6">
+                          <TryCatch DisplayName="Try Get Three Month Earlier Mean Exchange Rate" sap:VirtualizedContainerService.HintSize="533.6,1232" sap2010:WorkflowViewState.IdRef="TryCatch_6">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -671,7 +678,7 @@
                                   </Assign.To>
                                   <Assign.Value>
                                     <InArgument x:TypeArguments="s:DateTime">
-                                      <mca:CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_85">DateTime.ParseExact(DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) + "-" + DateTime.Now.AddMonths(-3).ToString("MM") + "-" + DateTime.Now.AddMonths(-3).ToString("yyyy"), "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)</mca:CSharpValue>
+                                      <mca:CSharpValue x:TypeArguments="s:DateTime" sap2010:WorkflowViewState.IdRef="CSharpValue`1_94">DateTime.ParseExact(DateTime.DaysInMonth(DateTime.Now.AddMonths(-3).Year, DateTime.Now.AddMonths(-3).Month) + "-" + DateTime.Now.AddMonths(-3).ToString("MM") + "-" + DateTime.Now.AddMonths(-3).ToString("yyyy"), "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture)</mca:CSharpValue>
                                     </InArgument>
                                   </Assign.Value>
                                 </Assign>
@@ -684,7 +691,6 @@
                                       <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="420,306.4" sap2010:WorkflowViewState.IdRef="Sequence_18">
                                         <Sequence.Variables>
                                           <Variable x:TypeArguments="x:Double" Name="meanExchangeRate" />
-                                          <Variable x:TypeArguments="x:String" Name="currentMeanExchangeRate" />
                                           <Variable x:TypeArguments="x:String" Name="effectiveDate" />
                                         </Sequence.Variables>
                                         <sap:WorkflowViewStateService.ViewState>
@@ -887,6 +893,7 @@
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
+        <ui:Comment sap:VirtualizedContainerService.HintSize="339.2,56" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Prepare column names" />
         <Assign sap:VirtualizedContainerService.HintSize="339.2,60" sap2010:WorkflowViewState.IdRef="Assign_4">
           <Assign.To>
             <OutArgument x:TypeArguments="x:String">
@@ -969,6 +976,7 @@
             </InArgument>
           </Assign.Value>
         </Assign>
+        <ui:Comment sap:VirtualizedContainerService.HintSize="339.2,75.2" sap2010:WorkflowViewState.IdRef="Comment_2" Text="// Create columns and add them to dataTable" />
         <ui:AddDataColumn x:TypeArguments="x:String" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" DisplayName="Add Currency Code Data Column" sap:VirtualizedContainerService.HintSize="339.2,22.4" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1">
           <ui:AddDataColumn.ColumnName>
             <InArgument x:TypeArguments="x:String">
@@ -1041,6 +1049,7 @@
             </InArgument>
           </ui:AddDataColumn.DataTable>
         </ui:AddDataColumn>
+        <ui:Comment sap:VirtualizedContainerService.HintSize="339.2,75.2" sap2010:WorkflowViewState.IdRef="Comment_3" Text="// Create primary key - will be used to save data in DataTable later" />
         <Assign DisplayName="Assign DataTable Primary Key" sap:VirtualizedContainerService.HintSize="339.2,60" sap2010:WorkflowViewState.IdRef="Assign_13">
           <Assign.To>
             <OutArgument x:TypeArguments="sd:DataColumn[]">
@@ -1053,11 +1062,12 @@
             </InArgument>
           </Assign.Value>
         </Assign>
+        <ui:Comment sap:VirtualizedContainerService.HintSize="339.2,56" sap2010:WorkflowViewState.IdRef="Comment_4" Text="// Create row for each currency" />
         <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="339.2,449.6" sap2010:WorkflowViewState.IdRef="ForEach`1_3">
           <ui:ForEach.Body>
             <ActivityAction x:TypeArguments="x:String">
               <ActivityAction.Argument>
-                <DelegateInArgument x:TypeArguments="x:String" Name="cC" />
+                <DelegateInArgument x:TypeArguments="x:String" Name="currencyCode" />
               </ActivityAction.Argument>
               <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="304,315.2" sap2010:WorkflowViewState.IdRef="Sequence_6">
                 <Sequence.Variables>
@@ -1088,7 +1098,7 @@
                   </Assign.To>
                   <Assign.Value>
                     <InArgument x:TypeArguments="x:Object">
-                      <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_46">cC</mca:CSharpValue>
+                      <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_46">currencyCode</mca:CSharpValue>
                     </InArgument>
                   </Assign.Value>
                 </Assign>

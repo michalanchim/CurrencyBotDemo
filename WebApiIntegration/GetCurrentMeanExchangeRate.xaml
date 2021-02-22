@@ -5,7 +5,7 @@
     <x:Property Name="out_CurrentExchangeRateEffectiveDate" Type="OutArgument(x:String)" />
   </x:Members>
   <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
-  <sap:VirtualizedContainerService.HintSize>684,1342.4</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>776,1342.4</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -86,11 +86,7 @@
       <Variable x:TypeArguments="x:Int32" Name="statusCode" />
       <Variable x:TypeArguments="x:String" Name="response" />
       <Variable x:TypeArguments="sxl:XDocument" Name="responseXML" />
-      <Variable x:TypeArguments="x:String" Name="workflowName">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">GetCurrentMeanExchangeRate</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="GetCurrentMeanExchangeRate" Name="workflowName" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -354,7 +350,7 @@
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="626.4,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info">
       <ui:LogMessage.Message>
         <InArgument x:TypeArguments="x:Object">
-          <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_21">workflowName + " workflow ended with outputs: out_MeanExchangeRate = " + out_MeanExchangeRate</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_40">workflowName + " workflow ended with outputs: out_MeanExchangeRate = " + out_MeanExchangeRate + ", out_CurrentExchangeRateEffectiveDate = " + out_CurrentExchangeRateEffectiveDate</mca:CSharpValue>
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>
